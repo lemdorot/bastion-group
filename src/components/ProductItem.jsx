@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const ProductItem = ({ product }) => {
+    const [ hit, setHit ] = useState(false)
+    const [ action, setAction ] = useState(false)
+
+    const getHit = (product) => {
+        return product.name.toLowerCase().indexOf('о') == -1 ? false : true
+    }
+
+    const getAction = (product) => {
+        return product.name.toLowerCase().indexOf('а') == -1 ? false : true
+    }
+
     return (
         <li className="product">
             <ul className="product_bonus-list">
-                <li><span className="product_bonus-item hit">хит</span></li>
-                <li><span className="product_bonus-item discount">скидка</span></li>
-                <li><span className="product_bonus-item action">акция</span></li>
+                {getHit(product) ? <li><span className="product_bonus-item hit">хит</span></li> : ''}
+                <li style={{display: 'none'}}><span className="product_bonus-item discount">скидка</span></li>
+                {getAction(product) ? <li><span className="product_bonus-item action">акция</span></li> : ''}
             </ul>
             <a href="#" className="product_favorite-link">
                 <img src="./img/products/star.svg" alt="звездочка" width="13"/>

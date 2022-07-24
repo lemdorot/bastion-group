@@ -2,6 +2,7 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useActions } from '../hooks/useActions';
 import { IProductType } from '../types/productType';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductForm = () => {
     const {addProductType} = useActions()
@@ -52,6 +53,8 @@ const ProductForm = () => {
                   
               {success ?  <p className="product_form-success">{success}</p> : ''}
               {error ?  <p className="product_form-error">{error}</p> : ''}
+
+              <Link to='/' className="product_form-back-link">Вернуться на главную страницу</Link>
             </form>
         </main>
     );

@@ -30,9 +30,9 @@ const ProductItem = ({ product }) => {
             <div className="product_price-wrapper">
                 <p className="product_price">{product.price} руб.</p>
                 <ul className="product_counter">
-                    <li><button className="item plus">+</button></li>
-                    <li><input type='text' className="item number" value='3'/></li>
-                    <li><button className="item minus">-</button></li>
+                    <li><button className="product_counter-btn">+</button></li>
+                    <li><input type='text' className="product_counter-number" value='3'/></li>
+                    <li><button className="product_counter-btn">-</button></li>
                 </ul>
             </div>
             <div className="product_btn-wrapper">

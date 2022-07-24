@@ -6,7 +6,7 @@
 .product 
     position: relative
     padding-top: 49px
-    padding-bottom: 28px
+    padding-bottom: 19px
     border-right: 1px solid #E6E6E6
     border-bottom: 1px solid #E6E6E6
     width: 280px
@@ -58,6 +58,7 @@
     color: #B3B3B3
 
 .product_busket-btn 
+    margin-bottom: 20px
     width: 240px
     height: 42px
     background: #C93E33
@@ -68,6 +69,9 @@
     line-height: 18px
     letter-spacing: 0.009em
     color: #fff
+
+.product_busket-btn img
+    margin-right: 10px
 
 .product_busket-btn.more 
     background: #B3B3B3
@@ -81,13 +85,12 @@
     background: #f9eceb
 
     font-size: 10px
-    line-height: 12px
+    line-height: 20px
     text-align: center
     letter-spacing: 0.009em
     color: #C93E33
 
 .product_description 
-    margin-bottom: 10px
     padding: 0
     padding-right: 5px
     margin-left: 20px
@@ -99,18 +102,43 @@
 .product_price 
     font-weight: 700
     font-size: 15px
-    line-height: 18px
+    line-height: 37px
     letter-spacing: 0.009em
 
 .product_price-wrapper
     display: flex
-    margin-left: 20px
+    justify-content: space-between
+    align-items: center
+    margin: 0 20px
 
 .product_counter
     display: none
 
-.product_btn-wrapper
-    display: none
+.product_counter-btn
+    padding: 0 10px
+    min-height: 35px
+    border: 1px solid #E6E6E6
+    background: #fff
+    font-family: 'Fira Sans'
+    font-style: normal
+    font-weight: 400
+    font-size: 15px
+    line-height: 18px
+    color: #000000
+
+.product_counter-number
+    width: 50px
+    min-height: 35px
+    border-top: 1px solid #E6E6E6
+    border-bottom: 1px solid #E6E6E6
+    background: #fff
+    text-align: center
+    font-family: 'Fira Sans'
+    font-style: normal
+    font-weight: 400
+    font-size: 18px
+    line-height: 22px
+    color: #000000
 
 .product_form
     display: flex
@@ -172,3 +200,25 @@
     text-align: left
     letter-spacing: 0.009em
     color: blue
+
+.product_btn-wrapper
+    width: 281px
+    padding-top: 20px
+    display: none
+    background: #fff
+    border: 1px solid #E6E6E6
+    border-top: none
+    z-index: 100
+
+.product:hover .product_counter
+    display: flex
+
+.product:hover .product_btn-wrapper
+    position: absolute
+    bottom: -135px
+    left: -1px
+    display: block
+
+.product:hover
+    padding-bottom: 10px
+    

@@ -71,3 +71,24 @@ export const removeCart = (cart: ICart) => {
         }
     }
 }
+
+export const clearCart = () => {
+    return async (dispatch: Dispatch<CartAction>) => {
+        try {
+            dispatch({type: CartActionTypes.CLEAR_CART})
+            dispatch({
+                type: CartActionTypes.ADD_CART_SUCCESS, 
+                payload: 'Корзина очищена'})
+            setTimeout(() => {
+                dispatch({
+                    type:  CartActionTypes.ADD_CART_SUCCESS, 
+                    payload: ''})}, 4000
+            )
+        } catch {
+            dispatch({
+                type: CartActionTypes.ADD_CART_ERROR, 
+                payload: 'Произошла ошибка при очистке корзины'
+            })
+        }
+    }
+}

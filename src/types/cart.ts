@@ -17,6 +17,7 @@ export enum CartActionTypes {
     ADD_CART_ERROR = "ADD_CART_ERROR",
     UPDATE_CART = "UPDATE_CART",
     REMOVE_CART = "REMOVE_CART",
+    CLEAR_CART = "CLEAR_CART",
 }
 
 interface AddCartAction {
@@ -44,9 +45,14 @@ interface RemoveCartAction {
     payload: ICart
 }
 
+interface ClearCartAction {
+    type: CartActionTypes.CLEAR_CART;
+}
+
 export type CartAction = 
     AddCartAction 
     | AddCartSuccessAction
     | AddCartErrorAction
     | UpdateCartAction
     | RemoveCartAction
+    | ClearCartAction

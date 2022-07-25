@@ -1,7 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const Header = () => {
+    const { carts } = useTypedSelector(state => state.cart)
+
+    const getCountProducts = (carts: any[]) => {
+        return carts.reduce(function(sum, current) {
+            return sum + current.count;
+          }, 0);
+    }
+
     return (
         <header className='page-header'>
 
@@ -69,8 +78,9 @@ const Header = () => {
                     <p className="logo-search-text">Избранное</p>
                 </div>
 
-                <div className='logo-search_card'>
+                <div className='logo-search_cart'>
                     <img src="./img/header/Union.svg" alt="значок корзина" width="20"/>
+                    {carts.length > 0 ? <span className='logo-search_cart-count'>{getCountProducts(carts)}</span> : ''}
                     <p className="logo-search-text">Корзина</p>
                 </div>
 

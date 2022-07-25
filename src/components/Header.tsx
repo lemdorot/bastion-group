@@ -78,11 +78,11 @@ const Header = () => {
                     <p className="logo-search-text">Избранное</p>
                 </div>
 
-                <div className='logo-search_cart'>
+                <Link to='/cart' className='logo-search_cart'>
                     <img src="./img/header/Union.svg" alt="значок корзина" width="20"/>
                     {carts.length > 0 ? <span className='logo-search_cart-count'>{getCountProducts(carts)}</span> : ''}
                     <p className="logo-search-text">Корзина</p>
-                </div>
+                </Link>
 
             </section>
 

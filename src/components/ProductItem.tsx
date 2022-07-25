@@ -41,7 +41,7 @@ const ProductItem = ({ product }: { product: IProduct }) => {
     }
 
     const countHandler = (e: any) => {
-        if (e.target.value < 0) {
+        if (e.target.value <= 1) {
             setCount(1)
         } else {
             setCount(e.target.value)
@@ -53,7 +53,11 @@ const ProductItem = ({ product }: { product: IProduct }) => {
     }
 
     const minusCount = () => {
-        setCount(count - 1)
+        if (count <= 1) {
+            setCount(1)
+        } else {
+            setCount(count - 1)
+        }
     }
 
     return (
@@ -84,7 +88,7 @@ const ProductItem = ({ product }: { product: IProduct }) => {
                     <img src="./img/main/shopping-cart.svg" alt="значок корзины" width="18"/>
                     В корзину
                 </button>
-                <button type="button" onClick={() => console.log(carts)} className="product_busket-btn more">
+                <button type="button" className="product_busket-btn more">
                     Подробнее
                 </button>
             </div>

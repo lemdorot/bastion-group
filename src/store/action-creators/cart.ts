@@ -48,3 +48,26 @@ export const updateCart = (cart: ICart) => {
         }
     }
 }
+
+export const removeCart = (cart: ICart) => {
+    return async (dispatch: Dispatch<CartAction>) => {
+        try {
+            dispatch({
+                type: CartActionTypes.REMOVE_CART, 
+                payload: cart})
+            dispatch({
+                type: CartActionTypes.ADD_CART_SUCCESS, 
+                payload: 'Продукт удален'})
+            setTimeout(() => {
+                dispatch({
+                    type:  CartActionTypes.ADD_CART_SUCCESS, 
+                    payload: ''})}, 4000
+            )
+        } catch {
+            dispatch({
+                type: CartActionTypes.ADD_CART_ERROR, 
+                payload: 'Произошла ошибка при удалении продукта'
+            })
+        }
+    }
+}

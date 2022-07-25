@@ -6,9 +6,11 @@ const Cart = () => {
     const { carts } = useTypedSelector(state => state.cart)
 
     const getSumPrices = (carts: any[]) => {
-        return carts.reduce(function(sum, current) {
+        let result = carts.reduce(function(sum, current) {
             return sum + current.sum;
           }, 0);
+
+        return result.toFixed(2)
     }
 
     return (

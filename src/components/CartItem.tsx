@@ -4,11 +4,9 @@ import { ICart } from '../types/cart';
 import { IProduct } from '../types/product';
 
 const CartItem = ({ cart }: { cart: ICart }) => {
-    const { updateCart } = useActions()
+    const { updateCart, removeCart } = useActions()
 
-    const updateCountCart = (cart: ICart, count: number) => {
-        console.log(count)
-        
+    const updateCountCart = (cart: ICart, count: number) => {        
         const newCart: ICart = {
             product: cart.product,
             count: count,
@@ -30,7 +28,6 @@ const CartItem = ({ cart }: { cart: ICart }) => {
     }
 
     const minusCount = () => {
-        console.log(typeof(cart.count))
         if (cart.count <= 1) {
             updateCountCart(cart, 1)
         } else {
@@ -53,7 +50,7 @@ const CartItem = ({ cart }: { cart: ICart }) => {
                 <li><button onClick={minusCount}  className="cart_product-counter-btn product_counter-btn">-</button></li>
             </ul>
             <p className="cart_product-price-sum">{cart.sum} руб.</p>
-            <a href="#">
+            <a href="#" onClick={(e) => { e.preventDefault(); removeCart(cart) }}>
                 <img src="./img/trash_1.svg" alt="значок корзины" width="18" className="cart_remove-img"/>
             </a>
         </li>

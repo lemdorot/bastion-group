@@ -89,7 +89,7 @@ const Header = () => {
             <section className='Breadcrumbs'>
                 <ul className="breadcrumbs-list">
                     <li className="breadcrumbs-item">
-                        <a className="breadcrumbs-link" href="#">Главная</a>
+                        <Link to='/' className="breadcrumbs-link">Главная</Link>
                     </li>
                     <li className="breadcrumbs-item">
                         <a className="breadcrumbs-link" href="#">Интернет-магазин</a>

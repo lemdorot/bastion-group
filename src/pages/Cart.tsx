@@ -1,6 +1,16 @@
 import React from 'react';
+import CartList from '../components/CartList';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const Cart = () => {
+    const { carts } = useTypedSelector(state => state.cart)
+
+    const getSumPrices = (carts: any[]) => {
+        return carts.reduce(function(sum, current) {
+            return sum + current.sum;
+          }, 0);
+    }
+
     return (
         <div className='cart'>
             <h1 className="cart_title">Корзина</h1>
@@ -14,74 +24,8 @@ const Cart = () => {
                         <p className="cart_message-text">Извините, но указанное ранее количество товара недоступно. Установлено ближайшее доступное значение.</p>
                     </div>
 
-                    <ul className="cart_product-list">
-                        <li className="cart_product-item">
-                            <img src="./img/1m-(6)_1.png" className="cart_product-img" alt="миниатюра товара" width="120"/>
-                            <div className="cart_product-info">
-                                <p className="cart_product-gost">ГОСТ 14911-82</p>
-                                <h3 className="cart_product-description">Опора подвижная ОПБ2</h3>
-                                <p className="cart_product-price">849.9 руб.</p>
-                            </div>
-                            <ul className="cart_product-counter product_counter">
-                                <li><button className="cart_product-counter-btn product_counter-btn">+</button></li>
-                                <li><input type='text' value='3' className="cart_product-counter-number product_counter-number"/></li>
-                                <li><button  className="cart_product-counter-btn product_counter-btn">-</button></li>
-                            </ul>
-                            <p className="cart_product-price-sum">2 549.7 руб.</p>
-                            <img src="./img/trash_1.svg" alt="значок корзины" width="18" className="cart_remove-img"/>
-                        </li>
-                        <li className="cart_product-item">
-                            <img src="./img/1m-(6)_1.png" className="cart_product-img" alt="миниатюра товара" width="120"/>
-                            <div className="cart_product-info">
-                                <p className="cart_product-gost">ГОСТ 14911-82</p>
-                                <h3 className="cart_product-description">Опора подвижная ОПБ2</h3>
-                                <p className="cart_product-price">849.9 руб.</p>
-                            </div>
-                            <ul className="cart_product-counter product_counter">
-                                <li><button className="cart_product-counter-btn product_counter-btn">+</button></li>
-                                <li><input type='text' value='3' className="cart_product-counter-number product_counter-number"/></li>
-                                <li><button  className="cart_product-counter-btn product_counter-btn">-</button></li>
-                            </ul>
-                            <p className="cart_product-price-sum">2 549.7 руб.</p>
-                            <img src="./img/trash_1.svg" alt="значок корзины" width="18" className="cart_remove-img"/>
-                        </li>
-                        <li className="cart_product-item">
-                            <img src="./img/1m-(6)_1.png" className="cart_product-img" alt="миниатюра товара" width="120"/>
-                            <div className="cart_product-info">
-                                <p className="cart_product-gost">ГОСТ 14911-82</p>
-                                <h3 className="cart_product-description">Опора подвижная ОПБ2</h3>
-                                <p className="cart_product-price">849.9 руб.</p>
-                            </div>
-                            <ul className="cart_product-counter product_counter">
-                                <li><button className="cart_product-counter-btn product_counter-btn">+</button></li>
-                                <li><input type='text' value='3' className="cart_product-counter-number product_counter-number"/></li>
-                                <li><button  className="cart_product-counter-btn product_counter-btn">-</button></li>
-                            </ul>
-                            <p className="cart_product-price-sum">2 549.7 руб.</p>
-                            <img src="./img/trash_1.svg" alt="значок корзины" width="18" className="cart_remove-img"/>
-                        </li>
-                        <li className="cart_product-item">
-                            <img src="./img/1m-(6)_1.png" className="cart_product-img" alt="миниатюра товара" width="120"/>
-                            <div className="cart_product-info">
-                                <p className="cart_product-gost">ГОСТ 14911-82</p>
-                                <h3 className="cart_product-description">Опора подвижная ОПБ2</h3>
-                                <p className="cart_product-price">849.9 руб.</p>
-                            </div>
-                            <ul className="cart_product-counter product_counter">
-                                <li><button className="cart_product-counter-btn product_counter-btn">+</button></li>
-                                <li><input type='text' value='3' className="cart_product-counter-number product_counter-number"/></li>
-                                <li><button  className="cart_product-counter-btn product_counter-btn">-</button></li>
-                            </ul>
-                            <p className="cart_product-price-sum">2 549.7 руб.</p>
-                            <img src="./img/trash_1.svg" alt="значок корзины" width="18" className="cart_remove-img"/>
-                        </li>
-                    </ul>
-                    <div className="cart_clear">
-                        <a href='#' className="cart_clear-link">
-                        <img src="./img/trash_1.svg" className="cart_clear-img" alt="значок корзины" width="18"/>
-                            Очистить корзину    
-                        </a>
-                    </div>
+                    <CartList />
+
                 </section>
 
                 <section className="cart_order-wrapper">
@@ -112,7 +56,7 @@ const Cart = () => {
                         
                         <div className="cart_order-total">
                             <p className="cart_order-total-text">Итого</p>
-                            <p className="cart_order-total-sum">8 499 руб.</p>
+                            <p className="cart_order-total-sum">{getSumPrices(carts)} руб.</p>
                         </div>
 
                         <button type="submit" className="cart_order-btn">

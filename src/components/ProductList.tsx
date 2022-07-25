@@ -8,7 +8,7 @@ const PostList = () => {
 
     if (!products.length) {
         return (
-            <h1 style={{textAlign: 'center'}}>
+            <h1 style={{textAlign: 'center', marginTop: '20px'}}>
                 Список пуст!
             </h1>
         )

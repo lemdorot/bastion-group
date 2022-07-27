@@ -1,7 +1,7 @@
 import { IProduct } from './../types/product';
 import { useMemo } from "react";
 
-export const useFilters = (products: any[], gostFilter: string[]) => {
+export const useGostFilters = (products: any[], gostFilter: string[]) => {
     const filteredGosts = useMemo(() => {
         if (gostFilter.length > 0) {
             let arr: any[] = []
@@ -15,5 +15,19 @@ export const useFilters = (products: any[], gostFilter: string[]) => {
         }
     }, [gostFilter, products])
 
-    return filteredGosts;
+    return filteredGosts
 }
+
+export const useFilters = (products: any[], gostFilter: string[], priceFilter: {min: number, max: number}) => {
+    const filteredGosts = useGostFilters(products, gostFilter)
+    console.log(filteredGosts)
+    console.log(priceFilter)
+    const filteredPrice = useMemo(() => {
+        return filteredGosts.filter(item => parseFloat(item.price) >= priceFilter.min && parseFloat(item.price) <= priceFilter.max)
+    }, [priceFilter, filteredGosts])
+
+    return filteredPrice
+}
+
+
+

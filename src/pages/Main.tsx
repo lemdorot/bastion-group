@@ -1,13 +1,31 @@
 import React, { useState } from 'react';
 import GostList from '../components/GostList';
+import PriceSlider from '../components/PriceSlider';
 import ProductList from '../components/ProductList';
 import { useFilters } from '../hooks/useFilters';
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import { IProduct } from '../types/product';
 
 const Main = () => {
     const { products } = useTypedSelector(state => state.product)
     const [gostFilter, setGostFilter] = useState<string[]>([])
-    const filteredProducts = useFilters(products, gostFilter);
+    const [minValue, setMinValue] = useState(Math.floor(getMinPrice(products)))
+    const [maxValue, setMaxValue] = useState(Math.ceil(getMaxPrice(products)))
+    const [priceFilter, setPriceFilter] = useState<{min: number, max: number}>({min: 0, max: 0})
+    const filteredProducts = useFilters(products, gostFilter, priceFilter)
+
+    function getMinPrice(products: IProduct[]) {
+        return products.sort((a,b)=> a.price - b.price)[0].price;
+    }
+
+    function getMaxPrice(products: IProduct[]) {
+        return products.sort((a,b)=> b.price - a.price)[0].price;
+    }
+
+    function getPriceFilter(min: number, max: number) {
+        setPriceFilter({min, max})
+        return {min, max}
+    }
 
     const addGostToArray = (checked: boolean, gost: string) => {
         if (checked) {
@@ -100,15 +118,7 @@ const Main = () => {
                             Фильтры
                         </h2>
                         <ul className="filters_list">
-                            <li className="filters_item filter title">
-                                <h3 className="filter_title">Цена, руб.</h3>
-                                <div className="filter_input-wrapper">
-                                    <input type="text" className="filter_input" value='от 104'/>
-                                    <input type="text" className="filter_input" value='до 9990' />
-                                </div>
-                                <div className="filter_slider">
-                                </div>
-                            </li>
+                            <PriceSlider min={minValue} max={maxValue} getPriceFilter={getPriceFilter}/>
                             <li className="filters_item filter">
                                 <h3 className="filter_title title">
                                     Тип продукта
@@ -131,7 +141,7 @@ const Main = () => {
                             <label htmlFor="price">Лучшая цена</label>
                         </div>
                         <div className="filter_button-wrapper">
-                            <button onClick={() => console.log(gostFilter)} className='filter_button'>Сбросить фильтры</button>
+                            <button className='filter_button'>Сбросить фильтры</button>
                         </div>
                     </div>
                 </aside>

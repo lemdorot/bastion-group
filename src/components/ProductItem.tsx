@@ -26,7 +26,7 @@ const ProductItem = ({ product }: { product: IProduct }) => {
             const cart: ICart = {
                 product,
                 count,
-                sum: parseFloat(product.price.toString().replace(/,/, '.')) * count
+                sum: parseFloat((parseFloat(product.price.toString().replace(/,/, '.')) * count).toFixed(2))
             }
             addProductToCart(cart)
         } else {
@@ -34,7 +34,7 @@ const ProductItem = ({ product }: { product: IProduct }) => {
             const cart: ICart = {
                 product,
                 count: productCount,
-                sum: parseFloat(product.price.toString().replace(/,/, '.')) * productCount
+                sum: parseFloat((parseFloat(product.price.toString().replace(/,/, '.')) * productCount).toFixed(2))
             }
             updateCart(cart)
         }

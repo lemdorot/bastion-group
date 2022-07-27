@@ -19,7 +19,7 @@ const Main = () => {
 
     function getMinPrice(products: IProduct[]) {
         if (products.length > 0){
-            return products.sort((a,b)=> a.price - b.price)[0].price;
+            return products.sort((a,b)=> a.price - b.price)[0].price - 1;
         } else {
             return 0
         }
@@ -27,7 +27,7 @@ const Main = () => {
 
     function getMaxPrice(products: IProduct[]) {
         if (products.length > 0) {
-            return products.sort((a,b)=> b.price - a.price)[0].price;
+            return products.sort((a,b)=> b.price - a.price)[0].price + 1;
         } else {
             return 1
         }

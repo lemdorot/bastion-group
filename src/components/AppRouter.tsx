@@ -9,12 +9,12 @@ import Cart from '../pages/Cart';
 const AppRouter = () => {
     return (
         <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/productForm" element={<ProductForm />} />
-            <Route path="/productTypeForm" element={<ProductTypeForm />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/error" element={<Error />} />
-            <Route path='*' element={<Navigate replace to="/error" />}/>
+            <Route path={process.env.PUBLIC_URL + "/"} element={<Main />} />
+            <Route path={process.env.PUBLIC_URL + "/productForm"} element={<ProductForm />} />
+            <Route path={process.env.PUBLIC_URL + "/productTypeForm"} element={<ProductTypeForm />} />
+            <Route path={process.env.PUBLIC_URL + "/cart"} element={<Cart />} />
+            <Route path={process.env.PUBLIC_URL + "/error"} element={<Error />} />
+            <Route path={process.env.PUBLIC_URL + '*'} element={<Navigate replace to="/error" />}/>
         </Routes>
     );
 };

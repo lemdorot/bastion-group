@@ -18,11 +18,20 @@ const Main = () => {
     const filteredProducts = useFilters(products, gostFilter, priceFilter, productTypeId)
 
     function getMinPrice(products: IProduct[]) {
-        return products.sort((a,b)=> a.price - b.price)[0].price;
+        if (products.length > 0){
+            return products.sort((a,b)=> a.price - b.price)[0].price;
+        } else {
+            return 0
+        }
     }
 
     function getMaxPrice(products: IProduct[]) {
-        return products.sort((a,b)=> b.price - a.price)[0].price;
+        if (products.length > 0) {
+            return products.sort((a,b)=> b.price - a.price)[0].price;
+        } else {
+            return 1
+        }
+        
     }
 
     function getPriceFilter(min: number, max: number) {

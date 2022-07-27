@@ -1,11 +1,11 @@
 import React from 'react';
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import { IProduct } from '../types/product';
 import ProductItem from './ProductItem';
 
 
-const PostList = () => {
-    const { products } = useTypedSelector(state => state.product)
-
+const PostList = ({ products }: { products: IProduct[] }) => {
+    
     if (!products.length) {
         return (
             <h1 style={{textAlign: 'center', marginTop: '20px'}}>

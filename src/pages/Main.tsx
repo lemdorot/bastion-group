@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import GostList from '../components/GostList';
 import ProductList from '../components/ProductList';
+import { useFilters } from '../hooks/useFilters';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const Main = () => {
+    const { products } = useTypedSelector(state => state.product)
+    const [gostFilter, setGostFilter] = useState<string[]>([])
+    const filteredProducts = useFilters(products, gostFilter);
+
+    const addGostToArray = (checked: boolean, gost: string) => {
+        if (checked) {
+            setGostFilter([...gostFilter, gost])
+        } else {
+            setGostFilter(gostFilter.filter((g: string) => g != gost))
+        }
+    }
+
     return (
         <main className='main'>
             <section className='main_sort'>
@@ -116,29 +131,13 @@ const Main = () => {
                             <label htmlFor="price">Лучшая цена</label>
                         </div>
                         <div className="filter_button-wrapper">
-                            <button className='filter_button'>Сбросить фильтры</button>
+                            <button onClick={() => console.log(gostFilter)} className='filter_button'>Сбросить фильтры</button>
                         </div>
                     </div>
                 </aside>
                 <section className="products">
-                    <ul className="gosts_list title">
-                        <li className="gosts-item">
-                            <a href="#" className="gosts-link current">ГОСТ 14911-82</a>
-                        </li>
-                        <li className="gosts-item">
-                            <a href="#" className="gosts-link">ОСТ 36-146-88</a>
-                        </li>
-                        <li className="gosts-item">
-                            <a href="#" className="gosts-link">НТС 65-06</a>
-                        </li>
-                        <li className="gosts-item">
-                            <a href="#" className="gosts-link">ОСТ 36-146-88</a>
-                        </li>
-                        <li className="gosts-item">
-                            <a href="#" className="gosts-link">НТС 65-06</a>
-                        </li>
-                    </ul>
-                    <ProductList />
+                    <GostList addGostToArray={addGostToArray} />
+                    <ProductList products={filteredProducts}/>
                 </section>
             </section>
 

@@ -5,14 +5,17 @@ import ProductList from '../components/ProductList';
 import { useFilters } from '../hooks/useFilters';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { IProduct } from '../types/product';
+import { IProductType } from '../types/productType';
 
 const Main = () => {
+    const { productTypes } = useTypedSelector(state => state.productType)
     const { products } = useTypedSelector(state => state.product)
+    const [productTypeId, setProductTypeId] = useState<number>(0)
     const [gostFilter, setGostFilter] = useState<string[]>([])
     const [minValue, setMinValue] = useState(Math.floor(getMinPrice(products)))
     const [maxValue, setMaxValue] = useState(Math.ceil(getMaxPrice(products)))
     const [priceFilter, setPriceFilter] = useState<{min: number, max: number}>({min: 0, max: 0})
-    const filteredProducts = useFilters(products, gostFilter, priceFilter)
+    const filteredProducts = useFilters(products, gostFilter, priceFilter, productTypeId)
 
     function getMinPrice(products: IProduct[]) {
         return products.sort((a,b)=> a.price - b.price)[0].price;
@@ -34,6 +37,10 @@ const Main = () => {
             setGostFilter(gostFilter.filter((g: string) => g != gost))
         }
     }
+
+    const productTypeIdHandler = (e: any) => {
+        setProductTypeId(e.target.value)
+      }
 
     return (
         <main className='main'>
@@ -124,6 +131,18 @@ const Main = () => {
                                     Тип продукта
                                     <img src="./img/Union.svg" alt="" className="filter_img" />
                                 </h3>
+                                <select 
+                                    value={productTypeId}
+                                    onChange={productTypeIdHandler}
+                                    className='filter_product-type'
+                                >
+                                    <option disabled value="0">Тип не указан</option>
+                                    {productTypes.map(option => 
+                                        <option key={option.id} value={option.id}>
+                                            {option.name}
+                                        </option>
+                                    )}
+                                </select>
                             </li>
                             <li className="filters_item filter">
                                 <h3 className="filter_title title">
